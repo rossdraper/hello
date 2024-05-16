@@ -1,1 +1,1 @@
-cat ./db.js
+ls -alh
