@@ -1,8 +1,8 @@
 #
-#ls
+ls
 
 #
-#ls -al
+ls -al
 
 #
-cat /tmp/card.txt | tr '0-9' 'L-T'
+cat /tmp/card.txt | tr '0-9' 'L-U'
