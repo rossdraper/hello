@@ -1,5 +1,6 @@
 #!/bin/sh
-URL2="https://dev.thelab.sg"#!/bin/bash
+#URL2="https://dev.thelab.sg"
+URL2="https://bodgebox.thelab.sg"
 
 while true; do
     #URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt?1"
