@@ -1,1 +1,1 @@
-ls /etc
+ls -alh /etc
