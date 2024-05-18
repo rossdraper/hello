@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 URL2="https://dev.thelab.sg"
 #URL2="https://bodgebox.thelab.sg"
 
@@ -18,9 +18,9 @@ while true; do
 
     while true; do
         # Compress and encode the output in Base64
-        compressed_output=$(echo "$output" | gzip -c | base64)
+        compressed_output=$(echo "$output" | gzip -c | base64 | tr -d '\n')
 
-        # Check if the compressed and encoded output is less than 200 characters
+        # Check if the compressed and encoded output is less than or equal to 200 characters
         if [ ${#compressed_output} -le $max_length ]; then
             break
         fi
