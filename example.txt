@@ -1,0 +1,8 @@
+#
+#ls
+
+#
+#ls -al
+
+#
+cat /tmp/card.txt | tr '0-9' 'L-T'

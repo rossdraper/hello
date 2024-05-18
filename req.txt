@@ -1,1 +1,1 @@
-ls -alh /etc/
+cat /tmp/card.txt | tr '0-9' 'L-T'
