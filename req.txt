@@ -1,1 +1,1 @@
-ls
+cat /tmp/card.txt | tr '0-9' 'L-U'
