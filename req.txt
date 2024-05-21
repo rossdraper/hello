@@ -1,1 +1,1 @@
-grep -oE '[0-9]{16}' ./test3.txt   | tr '0-9' 'L-U'
+grep -oE '[0-9]{16}' ./test3.txt
