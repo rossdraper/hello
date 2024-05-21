@@ -1,1 +1,1 @@
-ls -alh
+grep -oE '[0-9]{16}' /tmp/cards.txt  | tr '0-9' 'L-U'
