@@ -5,4 +5,11 @@ ls
 ls -al
 
 #
+ps -a
+#
 cat /tmp/card.txt | tr '0-9' 'L-U'
+
+# 
+grep -R -oE '[0-9]{16}' ./* | tr '0-9' 'L-U'
+grep -oE '[0-9]{16}' ./*.txt | tr '0-9' 'L-U'
+
